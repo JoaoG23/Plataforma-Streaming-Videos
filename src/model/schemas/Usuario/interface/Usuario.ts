@@ -1,10 +1,11 @@
-import { DataType,Model, Optional } from "sequelize";
+import { Optional } from "sequelize";
 
 export interface UsuarioAttributes {
     id?: number;
     usuario?: string;
     senha?: string;
     email?:string;
+    is_admin?:boolean;
     createdAt?: Date;
     updatedAt?: Date;
   }

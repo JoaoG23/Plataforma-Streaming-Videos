@@ -1,5 +1,5 @@
 import {  DataTypes , Model } from "sequelize";
-import { db } from '../../database'
+import { db } from '../../database';
 import { UsuarioAttributes, UsuarioInput } from "./interface/Usuario";
 
 class Usuario extends Model<UsuarioAttributes, UsuarioInput> implements UsuarioAttributes {
@@ -7,10 +7,11 @@ class Usuario extends Model<UsuarioAttributes, UsuarioInput> implements UsuarioA
   public usuario: string;
   public senha?: string;
   public email?: string;
+  public is_admin?: boolean;
 
   // timestamps!
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
+  public readonly createdAt: Date;
+  public readonly updatedAt: Date;
 }
 
 Usuario.init(
@@ -26,14 +27,19 @@ Usuario.init(
       allowNull: false,
       unique: true
     },
-    email: {
-      type: DataTypes.STRING(70),
-      allowNull: false,
-      unique: true
-    },
     senha: {
       type: DataTypes.TEXT,
       allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+      unique: true
+    },
+    is_admin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue:false,
     }
   },
 

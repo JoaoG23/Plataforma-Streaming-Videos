@@ -4,28 +4,125 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     return queryInterface.sequelize.transaction(() => {
       return Promise.all([
+
         queryInterface.createTable("tb_usuarios", {
             id: {
-              type: DataTypes.INTEGER,
+              type: Sequelize.DataTypes.INTEGER,
               autoIncrement: true,
               allowNull: false,
               primaryKey: true,
             },
             usuario: {
-              type: DataTypes.STRING(70),
+              type: Sequelize.DataTypes.STRING(70),
               allowNull: false,
               unique: true
             },
             email: {
-              type: DataTypes.STRING(70),
+              type: Sequelize.DataTypes.STRING(70),
               allowNull: false,
               unique: true
             },
             senha: {
-              type: DataTypes.TEXT,
+              type: Sequelize.DataTypes.TEXT,
               allowNull: false
+            },
+            createdAt:{
+              type:Sequelize.DataTypes.DATE
+            },
+            updatedAt:{
+              type:Sequelize.DataTypes.DATE
             }
         }),
+
+        queryInterface.createTable("tb_videos", {
+            id: {
+              type: Sequelize.DataTypes.INTEGER,
+              autoIncrement: true,
+              allowNull: false,
+              primaryKey: true,
+            },
+            titulo:{
+              type:Sequelize.DataTypes.STRING,
+              allowNull: false,
+            },
+            sobre:{
+              type:Sequelize.DataTypes.STRING,
+              allowNull: false,
+            },
+            url:{
+              type:Sequelize.DataTypes.TEXT,
+              allowNull: false,
+            },
+            ano:{
+              type:Sequelize.DataTypes.INTEGER,
+              allowNull: false,
+            },
+            autor:{
+              type:Sequelize.DataTypes.STRING,
+              allowNull: true,
+            },
+        }),
+        
+        queryInterface.createTable("tb_tags", {
+          id: {
+            type: Sequelize.DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
+            allowNull: false,
+          },
+          titulo: {
+            type: Sequelize.DataTypes.STRING,
+            allowNull: false,
+          }
+        }),
+
+        queryInterface.createTable("tb_tags_videos", {
+          id: {
+            type: Sequelize.DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
+            allowNull: false,
+          },
+          id_video: {
+            type: Sequelize.DataTypes.INTEGER,
+            references: {
+              model: "tb_videos",
+              key: "id",
+            },
+          },
+          id_tags: {
+            type: Sequelize.DataTypes.INTEGER,
+            references: {
+              model: "tb_tags",
+              key: "id",
+            },
+          },
+        }),
+        
+        queryInterface.createTable("tb_favoritos", {
+          id: {
+            type: Sequelize.DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
+            allowNull: false,
+          },
+          id_usuario: {
+            type: Sequelize.DataTypes.INTEGER,
+            references: {
+              model: "tb_usuarios",
+              key: "id",
+            },
+          },
+          id_video: {
+            type: Sequelize.DataTypes.INTEGER,
+            references: {
+              model: "tb_videos",
+              key: "id",
+            },
+          }
+        }),
+        
+
       ]);
     });
   },
@@ -34,6 +131,10 @@ module.exports = {
     return queryInterface.sequelize.transaction(() => {
       return Promise.all([
         queryInterface.dropTable("tb_usuarios", { force: true }),
+        queryInterface.dropTable("tb_videos", { force: true }),
+        queryInterface.dropTable("tb_tags", { force: true }),
+        queryInterface.dropTable("tb_tags_videos", { force: true }),
+        queryInterface.dropTable("tb_favoritos", { force: true }),
       ]);
     });
   },
