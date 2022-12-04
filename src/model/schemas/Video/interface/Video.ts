@@ -7,6 +7,7 @@ export interface VideoAttributes {
     url?: string;
     ano?: number;
     autor?: string;
+    tag_id?:number;
   }
 
 export interface VideoInput extends Optional<VideoAttributes, 'id'> {}

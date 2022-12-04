@@ -1,10 +1,16 @@
-import { Model } from "sequelize-typescript";
-import Tag from "../schemas/Tag/TagModel";
-import Video from "../schemas/Video/VideoModel";
-import { VideoInterface } from "./interfaces-services/VideoInterface";
+import Tag from "../model/schemas/Tag/TagModel";
+import { VideoInput } from "../model/schemas/Video/interface/Video";
+import Video from "../model/schemas/Video/VideoModel";
+import validacao from "../utils/Validacao";
 
-class VideoServices implements VideoInterface {
-  criar(dadosVideo: Video) {
+class VideoServices {
+  async verificaSeExisteTag(id: number) {
+    return await validacao.validarSeExistePropriedade(
+      { id: id },
+      Tag
+    );
+  }
+  criar(dadosVideo: VideoInput) {
     const video = Video.create(dadosVideo);
     return video;
   }

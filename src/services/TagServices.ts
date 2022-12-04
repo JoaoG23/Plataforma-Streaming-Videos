@@ -1,10 +1,10 @@
-import { Model } from "sequelize-typescript";
-import Tag from "../schemas/Tag/TagModel";
-import { TagInterface } from "./interfaces-services/TagInterface";
+import listadorJoinTabelas from "../utils/ListadorJoinTabelas";
+import Tag from "../model/schemas/Tag/TagModel";
 
-class TagServices implements TagInterface {
+class TagServices  {
   listarVideosPorTag(nomeTag: string) {
-    throw new Error("Method not implemented.");
+
+    return listadorJoinTabelas.listaVideosTagsPorNome(nomeTag)
   }
   criar(dadosTag: Tag) {
     const tag = Tag.create(dadosTag);
@@ -17,6 +17,7 @@ class TagServices implements TagInterface {
     return Tag.findByPk(id);
   }
   deletar(id: number) {
+
     return Tag.destroy({
       where: {
         id: id,
@@ -24,7 +25,7 @@ class TagServices implements TagInterface {
       force: true,
     });
   }
-  
+
   editar(dadosEditar: object, id: number) {
     return Tag.update(dadosEditar as object, {
       returning: true,

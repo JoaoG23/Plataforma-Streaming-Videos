@@ -43,7 +43,6 @@ npx sequelize-cli db:migrate:undo
 
 1. Para criacao do Seeds 
 npx sequelize-cli db:seed:undo:all
-npx sequelize-cli db:seed:all
 
 
 1. Criar um SEEDER 

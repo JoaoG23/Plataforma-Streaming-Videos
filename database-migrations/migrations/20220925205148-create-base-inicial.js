@@ -26,6 +26,11 @@ module.exports = {
               type: Sequelize.DataTypes.TEXT,
               allowNull: false
             },
+            is_admin:{
+              type: Sequelize.DataTypes.BOOLEAN,
+              allowNull: false,
+              defaultValue:false
+            },
             createdAt:{
               type:Sequelize.DataTypes.DATE
             },
@@ -57,6 +62,13 @@ module.exports = {
               type:Sequelize.DataTypes.INTEGER,
               allowNull: false,
             },
+            tag_id: {
+              type: Sequelize.DataTypes.INTEGER,
+              references: {
+                model: "tb_tags",
+                key: "id",
+              },
+            },
             autor:{
               type:Sequelize.DataTypes.STRING,
               allowNull: true,
@@ -76,28 +88,6 @@ module.exports = {
           }
         }),
 
-        queryInterface.createTable("tb_tags_videos", {
-          id: {
-            type: Sequelize.DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true,
-            allowNull: false,
-          },
-          id_video: {
-            type: Sequelize.DataTypes.INTEGER,
-            references: {
-              model: "tb_videos",
-              key: "id",
-            },
-          },
-          id_tags: {
-            type: Sequelize.DataTypes.INTEGER,
-            references: {
-              model: "tb_tags",
-              key: "id",
-            },
-          },
-        }),
         
         queryInterface.createTable("tb_favoritos", {
           id: {
@@ -122,7 +112,6 @@ module.exports = {
           }
         }),
         
-
       ]);
     });
   },
@@ -133,7 +122,6 @@ module.exports = {
         queryInterface.dropTable("tb_usuarios", { force: true }),
         queryInterface.dropTable("tb_videos", { force: true }),
         queryInterface.dropTable("tb_tags", { force: true }),
-        queryInterface.dropTable("tb_tags_videos", { force: true }),
         queryInterface.dropTable("tb_favoritos", { force: true }),
       ]);
     });

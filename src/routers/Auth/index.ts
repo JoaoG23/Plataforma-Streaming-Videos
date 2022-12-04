@@ -10,7 +10,7 @@ class Auth {
     if (!token)
       return res
         .status(401)
-        .send({ situation: false, msg: "Você ainda não está logado.." });
+        .send({ ok: false, msg: "Você ainda não está logado.." });
     try {
       await jwt.verify(token, secret);
 
@@ -22,13 +22,13 @@ class Auth {
   }
 
   public async admin(req: Request, res: Response, next: NextFunction) {
-    if (req.userData.admin === 1) {
+    if (req.userData.is_admin) {
       next();
     } else {
       res
         .status(401)
         .json({
-          situation: false,
+          ok: false,
           msg: 'Acesso negado: Você não é administrador.',
         });
     }

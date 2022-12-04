@@ -36,6 +36,13 @@ Video.init(
       type:DataTypes.INTEGER,
       allowNull: false,
     },
+    tag_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "tb_tags",
+        key: "id",
+      },
+    },
     autor:{
       type:DataTypes.STRING,
       allowNull: true,
