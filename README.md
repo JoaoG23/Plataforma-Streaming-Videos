@@ -148,6 +148,8 @@ A api tem 5 rotas principais.
 
 Confira a documentação mais detalhada da API com as rotas-><a href='https://docs-api-streaming.netlify.app/'>Clicando aqui</a>
 
+Video de demostração do teste: https://drive.google.com/file/d/10WzEzibgCH_3b_IHEZfvZT4TlSjXE40o/view?usp=sharing
+        
 </div>
 <br>
 </div><div>
