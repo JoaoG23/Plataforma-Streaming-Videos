@@ -11,7 +11,7 @@
     </ol>
 <div>
 <h3>Introdução</h3>
-<div> Tem o intuito de avalição das competências requiridas na criação de usa Streaming de videos</div>
+<div> Criação de um serviço de streaming com as Url do banco de dados</div>
 <br>
 </div>
 <div>
